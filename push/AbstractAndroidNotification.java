@@ -97,11 +97,11 @@ public abstract class AbstractAndroidNotification extends AbstractUmengNotificat
 		} else if (PAYLOAD_KEYS.contains(key)) {
 			// This key should be in the payload level
 			JSONObject payloadJson = null;
-			if (rootJson.has(payLoad)) {
-				payloadJson = rootJson.getJSONObject(payLoad);
+			if (rootJson.has(PushConstant.PAY_LOAD)) {
+				payloadJson = rootJson.getJSONObject(PushConstant.PAY_LOAD);
 			} else {
 				payloadJson = new JSONObject();
-				rootJson.put(payLoad, payloadJson);
+				rootJson.put(PushConstant.PAY_LOAD, payloadJson);
 			}
 			payloadJson.put(key, value);
 		} else if (BODY_KEYS.contains(key)) {
@@ -109,32 +109,33 @@ public abstract class AbstractAndroidNotification extends AbstractUmengNotificat
 			JSONObject bodyJson = null;
 			JSONObject payloadJson = null;
 			// 'body' is under 'payload', so build a payload if it doesn't exist
-			if (rootJson.has(payLoad)) {
-				payloadJson = rootJson.getJSONObject(payLoad);
+			if (rootJson.has(PushConstant.PAY_LOAD)) {
+				payloadJson = rootJson.getJSONObject(PushConstant.PAY_LOAD);
 			} else {
 				payloadJson = new JSONObject();
-				rootJson.put(payLoad, payloadJson);
+				rootJson.put(PushConstant.PAY_LOAD, payloadJson);
 			}
 			// Get body JSONObject, generate one if not existed
-			if (payloadJson.has(body)) {
-				bodyJson = payloadJson.getJSONObject(body);
+			if (payloadJson.has(PushConstant.BODY)) {
+				bodyJson = payloadJson.getJSONObject(PushConstant.BODY);
 			} else {
 				bodyJson = new JSONObject();
-				payloadJson.put(body, bodyJson);
+				payloadJson.put(PushConstant.BODY, bodyJson);
 			}
 			bodyJson.put(key, value);
 		} else if (POLICY_KEYS.contains(key)) {
 			// This key should be in the body level
 			JSONObject policyJson = null;
-			if (rootJson.has(policy)) {
-				policyJson = rootJson.getJSONObject(policy);
+			if (rootJson.has(PushConstant.POLICY)) {
+				policyJson = rootJson.getJSONObject(PushConstant.POLICY);
 			} else {
 				policyJson = new JSONObject();
-				rootJson.put(policy, policyJson);
+				rootJson.put(PushConstant.POLICY, policyJson);
 			}
 			policyJson.put(key, value);
 		} else {
-			if (key == payLoad || key == body || key == policy || key == extra) {
+			if (key.equals(PushConstant.PAY_LOAD) || key.equals(PushConstant.BODY) || key.equals(PushConstant.POLICY)
+					|| key.equals(PushConstant.EXTRA)) {
 				throw new Exception(
 						"You don't need to set value for " + key + " , just set values for the sub keys in it.");
 			} else {
@@ -159,18 +160,18 @@ public abstract class AbstractAndroidNotification extends AbstractUmengNotificat
 	public boolean setExtraField(String key, String value) throws Exception {
 		JSONObject payloadJson = null;
 		JSONObject extraJson = null;
-		if (rootJson.has(payLoad)) {
-			payloadJson = rootJson.getJSONObject(payLoad);
+		if (rootJson.has(PushConstant.PAY_LOAD)) {
+			payloadJson = rootJson.getJSONObject(PushConstant.PAY_LOAD);
 		} else {
 			payloadJson = new JSONObject();
-			rootJson.put(payLoad, payloadJson);
+			rootJson.put(PushConstant.PAY_LOAD, payloadJson);
 		}
 
-		if (payloadJson.has(extra)) {
-			extraJson = payloadJson.getJSONObject(extra);
+		if (payloadJson.has(PushConstant.EXTRA)) {
+			extraJson = payloadJson.getJSONObject(PushConstant.EXTRA);
 		} else {
 			extraJson = new JSONObject();
-			payloadJson.put(extra, extraJson);
+			payloadJson.put(PushConstant.EXTRA, extraJson);
 		}
 		extraJson.put(key, value);
 		return true;

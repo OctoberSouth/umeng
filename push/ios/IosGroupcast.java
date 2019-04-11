@@ -3,6 +3,7 @@ package com.live.util.push.ios;
 import org.json.JSONObject;
 
 import com.live.util.push.AbstractIosNotification;
+import com.live.util.push.PushConstant;
 
 /**
  * 
@@ -13,13 +14,13 @@ import com.live.util.push.AbstractIosNotification;
  * @describe
  */
 public class IosGroupcast extends AbstractIosNotification {
-	public IosGroupcast(String appkey, String appMasterSecret) throws Exception {
-			setAppMasterSecret(appMasterSecret);
-			setPredefinedKeyValue("appkey", appkey);
-			this.setPredefinedKeyValue("type", "groupcast");	
+	public IosGroupcast() throws Exception {
+		setAppMasterSecret(PushConstant.SAPP_MASTER_SECRET);
+		setPredefinedKeyValue("appkey", PushConstant.APP_KEY);
+		this.setPredefinedKeyValue("type", "groupcast");
 	}
-	
+
 	public void setFilter(JSONObject filter) throws Exception {
-    	setPredefinedKeyValue("filter", filter);
-    }
+		setPredefinedKeyValue("filter", filter);
+	}
 }

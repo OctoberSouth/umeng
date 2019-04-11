@@ -1,6 +1,7 @@
 package com.live.util.push.ios;
 
 import com.live.util.push.AbstractIosNotification;
+import com.live.util.push.PushConstant;
 
 /**
  * 
@@ -11,9 +12,9 @@ import com.live.util.push.AbstractIosNotification;
  * @describe
  */
 public class IosUnicast extends AbstractIosNotification {
-	public IosUnicast(String appkey, String appMasterSecret) throws Exception {
-			setAppMasterSecret(appMasterSecret);
-			setPredefinedKeyValue("appkey", appkey);
+	public IosUnicast() throws Exception {
+		setAppMasterSecret(PushConstant.SAPP_MASTER_SECRET);
+		setPredefinedKeyValue("appkey", PushConstant.APP_KEY);
 			this.setPredefinedKeyValue("type", "unicast");	
 	}
 	

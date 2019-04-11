@@ -15,16 +15,6 @@ import org.json.JSONObject;
  */
 public abstract class AbstractUmengNotification {
 
-	protected String payLoad = "payload";
-
-	protected String body = "body";
-
-	protected String policy = "policy";
-
-	protected String extra = "extra";
-
-	protected String aps = "aps";
-
 	/**
 	 * This JSONObject is used for constructing the whole request string.
 	 */

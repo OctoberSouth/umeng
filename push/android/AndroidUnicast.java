@@ -1,6 +1,7 @@
 package com.live.util.push.android;
 
 import com.live.util.push.AbstractAndroidNotification;
+import com.live.util.push.PushConstant;
 
 /**
  * 
@@ -11,14 +12,14 @@ import com.live.util.push.AbstractAndroidNotification;
  * @describe
  */
 public class AndroidUnicast extends AbstractAndroidNotification {
-	public AndroidUnicast(String appkey,String appMasterSecret) throws Exception {
-			setAppMasterSecret(appMasterSecret);
-			setPredefinedKeyValue("appkey", appkey);
-			this.setPredefinedKeyValue("type", "unicast");	
+	public AndroidUnicast() throws Exception {
+		setAppMasterSecret(PushConstant.SAPP_MASTER_SECRET);
+		setPredefinedKeyValue("appkey", PushConstant.APP_KEY);
+		this.setPredefinedKeyValue("type", "unicast");
 	}
-	
+
 	public void setDeviceToken(String token) throws Exception {
-    	setPredefinedKeyValue("device_tokens", token);
-    }
+		setPredefinedKeyValue("device_tokens", token);
+	}
 
 }

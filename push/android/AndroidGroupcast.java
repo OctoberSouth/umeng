@@ -3,6 +3,7 @@ package com.live.util.push.android;
 import org.json.JSONObject;
 
 import com.live.util.push.AbstractAndroidNotification;
+import com.live.util.push.PushConstant;
 
 /**
  * 
@@ -13,13 +14,13 @@ import com.live.util.push.AbstractAndroidNotification;
  * @describe
  */
 public class AndroidGroupcast extends AbstractAndroidNotification {
-	public AndroidGroupcast(String appkey,String appMasterSecret) throws Exception {
-			setAppMasterSecret(appMasterSecret);
-			setPredefinedKeyValue("appkey", appkey);
-			this.setPredefinedKeyValue("type", "groupcast");	
+	public AndroidGroupcast() throws Exception {
+		setAppMasterSecret(PushConstant.SAPP_MASTER_SECRET);
+		setPredefinedKeyValue("appkey", PushConstant.APP_KEY);
+		this.setPredefinedKeyValue("type", "groupcast");
 	}
-	
+
 	public void setFilter(JSONObject filter) throws Exception {
-    	setPredefinedKeyValue("filter", filter);
-    }
+		setPredefinedKeyValue("filter", filter);
+	}
 }

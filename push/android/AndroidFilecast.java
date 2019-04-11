@@ -1,6 +1,7 @@
 package com.live.util.push.android;
 
 import com.live.util.push.AbstractAndroidNotification;
+import com.live.util.push.PushConstant;
 
 /**
  * 
@@ -11,13 +12,13 @@ import com.live.util.push.AbstractAndroidNotification;
  * @describe
  */
 public class AndroidFilecast extends AbstractAndroidNotification {
-	public AndroidFilecast(String appkey,String appMasterSecret) throws Exception {
-			setAppMasterSecret(appMasterSecret);
-			setPredefinedKeyValue("appkey", appkey);
-			this.setPredefinedKeyValue("type", "filecast");	
+	public AndroidFilecast() throws Exception {
+		setAppMasterSecret(PushConstant.SAPP_MASTER_SECRET);
+		setPredefinedKeyValue("appkey", PushConstant.APP_KEY);
+		this.setPredefinedKeyValue("type", "filecast");
 	}
-	
+
 	public void setFileId(String fileId) throws Exception {
-    	setPredefinedKeyValue("file_id", fileId);
-    }
+		setPredefinedKeyValue("file_id", fileId);
+	}
 }

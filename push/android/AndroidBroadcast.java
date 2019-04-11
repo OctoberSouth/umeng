@@ -1,6 +1,7 @@
 package com.live.util.push.android;
 
 import com.live.util.push.AbstractAndroidNotification;
+import com.live.util.push.PushConstant;
 
 /**
  * 
@@ -11,9 +12,9 @@ import com.live.util.push.AbstractAndroidNotification;
  * @describe
  */
 public class AndroidBroadcast extends AbstractAndroidNotification {
-	public AndroidBroadcast(String appkey, String appMasterSecret) throws Exception {
-		setAppMasterSecret(appMasterSecret);
-		setPredefinedKeyValue("appkey", appkey);
+	public AndroidBroadcast() throws Exception {
+		setAppMasterSecret(PushConstant.SAPP_MASTER_SECRET);
+		setPredefinedKeyValue("appkey", PushConstant.APP_KEY);
 		this.setPredefinedKeyValue("type", "broadcast");
 	}
 }

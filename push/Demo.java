@@ -23,23 +23,15 @@ import com.live.util.push.ios.IosUnicast;
  * @describe
  */
 public class Demo {
-	private String appkey = null;
-	private String appMasterSecret = null;
-	private String timestamp = null;
+	/**
+	 * private String timestamp = null;
+	 */
 	private PushClient client = new PushClient();
 	
-	public Demo(String key, String secret) {
-		try {
-			appkey = key;
-			appMasterSecret = secret;
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.exit(1);
-		}
-	}
+
 	
 	public void sendAndroidBroadcast() throws Exception {
-		AndroidBroadcast broadcast = new AndroidBroadcast(appkey,appMasterSecret);
+		AndroidBroadcast broadcast = new AndroidBroadcast();
 		broadcast.setTicker( "Android broadcast ticker");
 		broadcast.setTitle(  "中文的title");
 		broadcast.setText(   "Android broadcast text");
@@ -54,7 +46,7 @@ public class Demo {
 	}
 	
 	public void sendAndroidUnicast() throws Exception {
-		AndroidUnicast unicast = new AndroidUnicast(appkey,appMasterSecret);
+		AndroidUnicast unicast = new AndroidUnicast();
 		// TODO Set your device token
 		unicast.setDeviceToken( "your device token");
 		unicast.setTicker( "Android unicast ticker");
@@ -71,7 +63,7 @@ public class Demo {
 	}
 	
 	public void sendAndroidGroupcast() throws Exception {
-		AndroidGroupcast groupcast = new AndroidGroupcast(appkey,appMasterSecret);
+		AndroidGroupcast groupcast = new AndroidGroupcast();
 		/*  TODO
 		 *  Construct the filter condition:
 		 *  "where": 
@@ -109,7 +101,7 @@ public class Demo {
 	}
 	
 	public void sendAndroidCustomizedcast() throws Exception {
-		AndroidCustomizedcast customizedcast = new AndroidCustomizedcast(appkey,appMasterSecret);
+		AndroidCustomizedcast customizedcast = new AndroidCustomizedcast();
 		// TODO Set your alias here, and use comma to split them if there are multiple alias.
 		// And if you have many alias, you can also upload a file containing these alias, then 
 		// use file_id to send customized notification.
@@ -126,11 +118,12 @@ public class Demo {
 	}
 	
 	public void sendAndroidCustomizedcastFile() throws Exception {
-		AndroidCustomizedcast customizedcast = new AndroidCustomizedcast(appkey,appMasterSecret);
+		AndroidCustomizedcast customizedcast = new AndroidCustomizedcast();
 		// TODO Set your alias here, and use comma to split them if there are multiple alias.
 		// And if you have many alias, you can also upload a file containing these alias, then 
 		// use file_id to send customized notification.
-		String fileId = client.uploadContents(appkey,appMasterSecret,"aa"+"\n"+"bb"+"\n"+"alias");
+		String fileId = client.uploadContents(PushConstant.APP_KEY, PushConstant.SAPP_MASTER_SECRET,
+				"aa" + "\n" + "bb" + "\n" + "alias");
 		customizedcast.setFileId(fileId, "alias_type");
 		customizedcast.setTicker( "Android customizedcast ticker");
 		customizedcast.setTitle(  "中文的title");
@@ -144,9 +137,10 @@ public class Demo {
 	}
 	
 	public void sendAndroidFilecast() throws Exception {
-		AndroidFilecast filecast = new AndroidFilecast(appkey,appMasterSecret);
+		AndroidFilecast filecast = new AndroidFilecast();
 		// TODO upload your device tokens, and use '\n' to split them if there are multiple tokens 
-		String fileId = client.uploadContents(appkey,appMasterSecret,"aa"+"\n"+"bb");
+		String fileId = client.uploadContents(PushConstant.APP_KEY, PushConstant.SAPP_MASTER_SECRET,
+				"aa" + "\n" + "bb");
 		filecast.setFileId( fileId);
 		filecast.setTicker( "Android filecast ticker");
 		filecast.setTitle(  "中文的title");
@@ -157,7 +151,7 @@ public class Demo {
 	}
 	
 	public void sendIOSBroadcast() throws Exception {
-		IosBroadcast broadcast = new IosBroadcast(appkey, appMasterSecret);
+		IosBroadcast broadcast = new IosBroadcast();
 
 		broadcast.setAlert("IOS 广播测试");
 		broadcast.setBadge( 0);
@@ -170,7 +164,7 @@ public class Demo {
 	}
 	
 	public void sendIOSUnicast() throws Exception {
-		IosUnicast unicast = new IosUnicast(appkey, appMasterSecret);
+		IosUnicast unicast = new IosUnicast();
 		// TODO Set your device token
 		unicast.setDeviceToken( "xx");
 		unicast.setAlert("IOS 单播测试");
@@ -184,7 +178,7 @@ public class Demo {
 	}
 	
 	public void sendIOSGroupcast() throws Exception {
-		IosGroupcast groupcast = new IosGroupcast(appkey, appMasterSecret);
+		IosGroupcast groupcast = new IosGroupcast();
 		/*  TODO
 		 *  Construct the filter condition:
 		 *  "where": 
@@ -216,7 +210,7 @@ public class Demo {
 	}
 	
 	public void sendIOSCustomizedcast() throws Exception {
-		IosCustomizedcast customizedcast = new IosCustomizedcast(appkey, appMasterSecret);
+		IosCustomizedcast customizedcast = new IosCustomizedcast();
 		// TODO Set your alias and alias_type here, and use comma to split them if there are multiple alias.
 		// And if you have many alias, you can also upload a file containing these alias, then 
 		// use file_id to send customized notification.
@@ -230,9 +224,10 @@ public class Demo {
 	}
 	
 	public void sendIOSFilecast() throws Exception {
-		IosFilecast filecast = new IosFilecast(appkey, appMasterSecret);
+		IosFilecast filecast = new IosFilecast();
 		// TODO upload your device tokens, and use '\n' to split them if there are multiple tokens 
-		String fileId = client.uploadContents(appkey,appMasterSecret,"aa"+"\n"+"bb");
+		String fileId = client.uploadContents(PushConstant.APP_KEY, PushConstant.SAPP_MASTER_SECRET,
+				"aa" + "\n" + "bb");
 		filecast.setFileId( fileId);
 		filecast.setAlert("IOS 文件播测试");
 		filecast.setBadge( 0);
@@ -244,22 +239,21 @@ public class Demo {
 	
 	public static void main(String[] args) {
 		// TODO set your appkey and master secret here
-		Demo demo = new Demo("your appkey", "the app master secret");
+		Demo demo = new Demo();
 		try {
 			demo.sendAndroidUnicast();
-			/* TODO these methods are all available, just fill in some fields and do the test
-			 * demo.sendAndroidCustomizedcastFile();
-			 * demo.sendAndroidBroadcast();
-			 * demo.sendAndroidGroupcast();
-			 * demo.sendAndroidCustomizedcast();
-			 * demo.sendAndroidFilecast();
-			 * 
-			 * demo.sendIOSBroadcast();
-			 * demo.sendIOSUnicast();
-			 * demo.sendIOSGroupcast();
-			 * demo.sendIOSCustomizedcast();
-			 * demo.sendIOSFilecast();
-			 */
+			// TODO these methods are all available, just fill in some fields and do the
+			// test
+			demo.sendAndroidCustomizedcastFile();
+			demo.sendAndroidBroadcast();
+			demo.sendAndroidGroupcast();
+			demo.sendAndroidCustomizedcast();
+			demo.sendAndroidFilecast();
+			demo.sendIOSBroadcast();
+			demo.sendIOSUnicast();
+			demo.sendIOSGroupcast();
+			demo.sendIOSCustomizedcast();
+			demo.sendIOSFilecast();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

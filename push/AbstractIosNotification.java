@@ -31,31 +31,31 @@ public abstract class AbstractIosNotification extends AbstractUmengNotification 
 			// This key should be in the aps level
 			JSONObject apsJson = null;
 			JSONObject payloadJson = null;
-			if (rootJson.has(payLoad)) {
-				payloadJson = rootJson.getJSONObject(payLoad);
+			if (rootJson.has(PushConstant.PAY_LOAD)) {
+				payloadJson = rootJson.getJSONObject(PushConstant.PAY_LOAD);
 			} else {
 				payloadJson = new JSONObject();
-				rootJson.put(payLoad, payloadJson);
+				rootJson.put(PushConstant.PAY_LOAD, payloadJson);
 			}
-			if (payloadJson.has(aps)) {
-				apsJson = payloadJson.getJSONObject(aps);
+			if (payloadJson.has(PushConstant.APS)) {
+				apsJson = payloadJson.getJSONObject(PushConstant.APS);
 			} else {
 				apsJson = new JSONObject();
-				payloadJson.put(aps, apsJson);
+				payloadJson.put(PushConstant.APS, apsJson);
 			}
 			apsJson.put(key, value);
 		} else if (POLICY_KEYS.contains(key)) {
 			// This key should be in the body level
 			JSONObject policyJson = null;
-			if (rootJson.has(policy)) {
-				policyJson = rootJson.getJSONObject(policy);
+			if (rootJson.has(PushConstant.POLICY)) {
+				policyJson = rootJson.getJSONObject(PushConstant.POLICY);
 			} else {
 				policyJson = new JSONObject();
-				rootJson.put(policy, policyJson);
+				rootJson.put(PushConstant.POLICY, policyJson);
 			}
 			policyJson.put(key, value);
 		} else {
-			if (key == payLoad || key == aps || key == policy) {
+			if (key.equals(PushConstant.PAY_LOAD) || key.equals(PushConstant.APS) || key.equals(PushConstant.POLICY)) {
 				throw new Exception("You don't need to set value for " + key + " , just set values for the sub keys in it.");
 			} else {
 				throw new Exception("Unknownd key: " + key);
@@ -79,11 +79,11 @@ public abstract class AbstractIosNotification extends AbstractUmengNotification 
 	 */
 	public boolean setCustomizedField(String key, String value) throws Exception {
 		JSONObject payloadJson = null;
-		if (rootJson.has(payLoad)) {
-			payloadJson = rootJson.getJSONObject(payLoad);
+		if (rootJson.has(PushConstant.PAY_LOAD)) {
+			payloadJson = rootJson.getJSONObject(PushConstant.PAY_LOAD);
 		} else {
 			payloadJson = new JSONObject();
-			rootJson.put(payLoad, payloadJson);
+			rootJson.put(PushConstant.PAY_LOAD, payloadJson);
 		}
 		payloadJson.put(key, value);
 		return true;
